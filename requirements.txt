@@ -1,0 +1,6 @@
+PyQt5
+numpy
+matplotlib
+# GPU機能を使う場合は下記もインストール
+# pyopencl
+# numba 
