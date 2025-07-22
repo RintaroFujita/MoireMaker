@@ -4,6 +4,17 @@ Pythonで作成された動的なモアレパターンを生成・表示するGU
 
 ## 機能
 
+### メインアプリケーション (`pyqt_moire.py`)
+- **3種類のモアレパターン**
+  - Standard: 基本的なモアレパターン
+  - Wave: 波模様パターン（複雑さ・歪みパラメータ付き）
+  - Tree Rings: 木の年輪パターン（歪み・複雑さパラメータ付き）
+- **リアルタイムアニメーション**（60FPS）
+- **GPU加速対応**（OpenCL、Numba）
+- **動的リサイズ対応**
+- **FPS表示**
+- **詳細なパラメータ制御**
+
 ### 基本アプリケーション (`moire_app.py`)
 - 線形モアレパターンの生成
 - リアルタイムアニメーション
@@ -39,6 +50,41 @@ python moire_app.py
 python advanced_moire.py
 ```
 
+## Windowsの場合
+
+### 依存パッケージのインストール
+```cmd
+pip install -r requirements.txt
+```
+
+GPU機能を使いたい場合は追加で：
+```cmd
+pip install pyopencl numba
+```
+
+### 実行方法
+```cmd
+python pyqt_moire.py
+```
+
+### exeファイル化（スタンドアロン化）
+1. PyInstallerをインストール
+```cmd
+pip install pyinstaller
+```
+
+2. exe化コマンドを実行
+```cmd
+pyinstaller --onefile --windowed pyqt_moire.py
+```
+
+3. `dist/pyqt_moire.exe` が生成されます
+
+### Windowsでの注意事項
+- GPU機能はPCの環境・ドライバによって動作しない場合があります
+- exe化後はPythonがインストールされていないPCでも動作します
+- 実行時にウイルス対策ソフトが警告を出す場合がありますが、問題ありません
+
 ## コントロール
 
 ### 基本パラメータ
@@ -62,17 +108,20 @@ python advanced_moire.py
 ## 技術仕様
 
 - **言語**: Python 3.7+
-- **GUI**: tkinter
+- **GUI**: PyQt5（メイン）、tkinter（レガシー）
 - **グラフィックス**: matplotlib
 - **数値計算**: numpy
+- **GPU加速**: OpenCL、Numba（オプション）
 
 ## ファイル構成
 
 ```
 moaremaker/
+├── pyqt_moire.py         # メインのモアレアプリケーション（PyQt5版）
 ├── moire_app.py          # 基本モアレアプリケーション
 ├── advanced_moire.py     # 高度なモアレアプリケーション
 ├── requirements.txt      # 依存パッケージ
+├── README_windows.txt    # Windows用セットアップガイド
 └── README.md            # このファイル
 ```
 
